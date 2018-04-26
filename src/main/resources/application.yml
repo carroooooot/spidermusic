@@ -1,0 +1,68 @@
+spring:
+ datasource:
+  url: jdbc:mysql://db86.kanketv.com/ahdxitv?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+  username: root
+  password: Wasu234K5
+  driverClassName: com.mysql.jdbc.Driver
+  type: com.alibaba.druid.pool.DruidDataSource
+  druid:
+   initialSize: 2
+   minIdle: 2
+   maxActive: 30
+#   WebStatFilter:
+#    exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+   StatViewServlet:
+    loginUsername: druid
+    loginPassword: druid
+
+  filters: stat
+  maxActive: 20
+  initialSize: 1
+  maxWait: 60000
+  minIdle: 1
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: select 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxOpenPreparedStatements: 20
+  maxPoolPreparedStatementPerConnectionSize: 20
+  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+ data:
+  elasticsearch:
+   cluster-name: kanke-cluster
+   cluster-nodes: 121.42.232.181:19300
+   repositories:
+     enabled: true
+ redis:
+  database: 2
+  host: 121.42.232.187
+  port: 31809
+  password: Kanke789P123
+  timeout: 3000
+  jedis:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+
+server:
+ port: 8080
+# context-path: /springboot
+  #热部署
+ devtools:
+  restart:
+   enabled: true #热部署生效
+  #设置重启的目录
+  additional-paths: src/main/java
+ servlet:
+   context-path: /springboot
+#  servlet-path: .json
+  #exclude: WEB-INF/** #classpath目录下的WEB-INF文件夹内容修改不重启
+
+mybatis:
+ mapper-locations: classpath*:mybatis/mapping/*.xml
+ type-aliases-package: com.minxuan.entity
